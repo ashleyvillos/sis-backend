@@ -32,7 +32,7 @@ class StudentController extends Controller
                 ->where('students.basic_education_id', '>', 0)
                 ->orderBy('lastname')->paginate($limit);
         } else if ($madaris_id) {
-            $students = Student::select('students.id', 'madaris.firstname', 'madaris.lastname',
+            $students = Student::select('students.id', 'students.madaris_id','madaris.firstname', 'madaris.lastname',
                 'madaris.middlename', 'madaris.gender')
                 ->leftJoin('madaris', 'students.madaris_id', '=', 'madaris.id')
                 ->where('students.madaris_id', '>', 0)
@@ -44,7 +44,7 @@ class StudentController extends Controller
                 ->where('students.higher_education_id', '>', 0)
                 ->orderBy('lastname')->paginate($limit);
         } else if ($techvoc_id) {
-            $students = Student::select('students.id', 'techvocs.firstname', 'techvocs.lastname',
+            $students = Student::select('students.id', 'students.techvoc_id', 'techvocs.firstname', 'techvocs.lastname',
                 'techvocs.middlename', 'techvocs.gender')
                 ->leftJoin('techvocs', 'students.techvoc_id', '=', 'techvocs.id')
                 // ->where('students.techvoc_id', '>', $techvoc_id)

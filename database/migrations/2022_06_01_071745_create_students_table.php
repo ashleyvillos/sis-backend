@@ -18,7 +18,7 @@ class CreateStudentsTable extends Migration
             $table->integer('basic_education_id')->default(0);
             $table->integer('madaris_id')->default(0);
             $table->integer('higher_education_id')->default(0);
-            $table->integer('techcov_id')->default(0);
+            $table->integer('techvoc_id')->default(0);
             $table->timestamps();
         });
     }
