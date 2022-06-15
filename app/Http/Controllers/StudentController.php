@@ -21,32 +21,37 @@ class StudentController extends Controller
         $basic_education_id = $request->basic_education_id ? $request->basic_education_id : 0;
         $madaris_id = $request->madaris_id ? $request->madaris_id : 0;
         $higher_education_id = $request->higher_education_id ? $request->higher_education_id : 0;
-        $techcov_id = $request->techcov_id ? $request->techcov_id : 0;
+        $techvoc_id = $request->techvoc_id ? $request->techvoc_id : 0;
 
         $students = [];
 
         if ($basic_education_id) {
-            $students = Student::select('students.id', 'basic_education.firstname', 'basic_education.lastname', 
+            $students = Student::select('students.id', 'basic_education.firstname', 'basic_education.lastname',
                 'basic_education.middlename', 'basic_education.gender')
                 ->leftJoin('basic_education', 'students.basic_education_id', '=', 'basic_education.id')
+                ->where('students.basic_education_id', '>', 0)
                 ->orderBy('lastname')->paginate($limit);
         } else if ($madaris_id) {
-            $students = Student::select('students.id', 'madaris.firstname', 'madaris.lastname', 
+            $students = Student::select('students.id', 'madaris.firstname', 'madaris.lastname',
                 'madaris.middlename', 'madaris.gender')
                 ->leftJoin('madaris', 'students.madaris_id', '=', 'madaris.id')
+                ->where('students.madaris_id', '>', 0)
                 ->orderBy('lastname')->paginate($limit);
         } else if ($higher_education_id) {
-            $students = Student::select('students.id', 'higher_education.firstname', 'higher_education.lastname', 
+            $students = Student::select('students.id', 'higher_education.firstname', 'higher_education.lastname',
                 'higher_education.middlename', 'higher_education.gender')
                 ->leftJoin('higher_education', 'students.higher_education_id', '=', 'higher_education.id')
+                ->where('students.higher_education_id', '>', 0)
                 ->orderBy('lastname')->paginate($limit);
-        } else if ($techcov_id) {
-            $students = Student::select('students.id', 'techvoc.firstname', 'techvoc.lastname', 
-                'techvoc.middlename', 'techvoc.gender')
-                ->leftJoin('techvoc', 'students.techvoc_id', '=', 'techvoc.id')
+        } else if ($techvoc_id) {
+            $students = Student::select('students.id', 'techvocs.firstname', 'techvocs.lastname',
+                'techvocs.middlename', 'techvocs.gender')
+                ->leftJoin('techvocs', 'students.techvoc_id', '=', 'techvocs.id')
+                // ->where('students.techvoc_id', '>', $techvoc_id)
+                ->where('students.techvoc_id', '>', 0)
                 ->orderBy('lastname')->paginate($limit);
         }
-        
+
         return response(['data' => $students, 'limit' => $limit]);
     }
 
@@ -73,12 +78,12 @@ class StudentController extends Controller
         $basic_education_id = $request->input('basic_education_id');
         $madaris_id = $request->input('madaris_id');
         $higher_education_id = $request->input('higher_education_id');
-        $techcov_id = $request->input('techcov_id');
+        $techvoc_id = $request->input('techvoc_id');
 
         $student->basic_education_id = $basic_education_id;
         $student->madaris_id = $madaris_id;
         $student->higher_education_id = $higher_education_id;
-        $student->techcov_id = $techcov_id;
+        $student->techvoc_id = $techvoc_id;
 
         if ($student->save()) {
             return response(['success' => true]);
@@ -119,16 +124,16 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         $student = Student::findOrFail($id);
-        
+
         $basic_education_id = $request->input('basic_education_id');
         $madaris_id = $request->input('madaris_id');
         $higher_education_id = $request->input('higher_education_id');
-        $techcov_id = $request->input('techcov_id');
+        $techvoc_id = $request->input('techvoc_id');
 
         $student->basic_education_id = $basic_education_id;
         $student->madaris_id = $madaris_id;
         $student->higher_education_id = $higher_education_id;
-        $student->techcov_id = $techcov_id;
+        $student->techvoc_id = $techvoc_id;
 
         if ($student->save()) {
             return response(['success' => true]);
