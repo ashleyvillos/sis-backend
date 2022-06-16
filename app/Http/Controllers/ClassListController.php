@@ -17,9 +17,13 @@ class ClassListController extends Controller
     public function index(Request $request)
     {
         $limit = $request->limit ? $request->limit : 10;
+        $sy = $request->sy;
+        $term_id = $request->term_id;
 
         $class_lists = ClassList::select('id', 'subject_id', 'room_id', 'teacher_id', 
         'from', 'to', 'term_id', 'sy')
+            ->where('term_id', $term_id)
+            ->where('sy', $sy)
             ->orderBy('id')->paginate($limit);
 
         return response(['data' => $class_lists, 'limit' => $limit]);

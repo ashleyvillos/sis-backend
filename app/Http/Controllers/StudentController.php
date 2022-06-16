@@ -29,19 +29,19 @@ class StudentController extends Controller
             $students = Student::select('students.id', 'basic_education.firstname', 'basic_education.lastname',
                 'basic_education.middlename', 'basic_education.gender')
                 ->leftJoin('basic_education', 'students.basic_education_id', '=', 'basic_education.id')
-                ->where('students.basic_education_id', '>', 0)
+                // ->where('students.basic_education_id', '>', 0)
                 ->orderBy('lastname')->paginate($limit);
         } else if ($madaris_id) {
             $students = Student::select('students.id', 'students.madaris_id','madaris.firstname', 'madaris.lastname',
                 'madaris.middlename', 'madaris.gender')
                 ->leftJoin('madaris', 'students.madaris_id', '=', 'madaris.id')
-                ->where('students.madaris_id', '>', 0)
+                // ->where('students.madaris_id', '>', 0)
                 ->orderBy('lastname')->paginate($limit);
         } else if ($higher_education_id) {
             $students = Student::select('students.id', 'higher_education.firstname', 'higher_education.lastname',
                 'higher_education.middlename', 'higher_education.gender')
                 ->leftJoin('higher_education', 'students.higher_education_id', '=', 'higher_education.id')
-                ->where('students.higher_education_id', '>', 0)
+                // ->where('students.higher_education_id', '>', 0)
                 ->orderBy('lastname')->paginate($limit);
         } else if ($techvoc_id) {
             $students = Student::select('students.id', 'students.techvoc_id', 'techvocs.firstname', 'techvocs.lastname',

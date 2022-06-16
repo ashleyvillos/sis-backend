@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Teacher;
+use App\Models\Personnel;
 
 use DB;
 
-class TeacherController extends Controller
+class PersonnelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,15 +18,12 @@ class TeacherController extends Controller
     {
         $limit = $request->limit ? $request->limit : 10;
 
-        // $teachers = Teacher::select('*')
-        //     ->orderBy('id')->paginate($limit);
-
-        $teachers = Teacher::select('teachers.id', 'teachers.firstname', 
-            'teachers.lastname', 'teachers.middlename', 'departments.name', 'departments.code')
-            ->leftJoin('departments', 'departments.id', '=', 'teachers.department_id')
+        $personnels = Personnel::select('personnels.id', 'personnels.firstname', 
+            'personnels.lastname', 'personnels.middlename', 'departments.name', 'departments.code')
+            ->leftJoin('departments', 'departments.id', '=', 'personnels.department_id')
             ->orderBy('id')->paginate($limit);
 
-        return response(['data' => $teachers, 'limit' => $limit]);
+        return response(['data' => $personnels, 'limit' => $limit]);
     }
 
     /**
@@ -47,19 +44,19 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        $teacher = new Teacher;
+        $personnel = new Personnel;
 
         $firstname = $request->input('firstname');
         $lastname = $request->input('lastname');
         $middlename = $request->input('middlename');
         $department_id = $request->input('department_id');
 
-        $teacher->firstname = $firstname;
-        $teacher->lastname = $lastname;
-        $teacher->middlename = $middlename;
-        $teacher->department_id = $department_id;
+        $personnel->firstname = $firstname;
+        $personnel->lastname = $lastname;
+        $personnel->middlename = $middlename;
+        $personnel->department_id = $department_id;
 
-        if ($teacher->save()) {
+        if ($personnel->save()) {
             return response(['success' => true]);
         }
 
@@ -97,19 +94,19 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $teacher = Teacher::findOrFail($id);
+        $personnel = new Personnel;
         
         $firstname = $request->input('firstname');
         $lastname = $request->input('lastname');
         $middlename = $request->input('middlename');
         $department_id = $request->input('department_id');
 
-        $teacher->firstname = $firstname;
-        $teacher->lastname = $lastname;
-        $teacher->middlename = $middlename;
-        $teacher->department_id = $department_id;
+        $personnel->firstname = $firstname;
+        $personnel->lastname = $lastname;
+        $personnel->middlename = $middlename;
+        $personnel->department_id = $department_id;
 
-        if ($teacher->save()) {
+        if ($personnel->save()) {
             return response(['success' => true]);
         }
 
@@ -124,7 +121,7 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
-        $deleted = DB::table('teachers')->delete($id);
+        $deleted = DB::table('personnels')->delete($id);
 
         if ($deleted) {
             return response(['success' => true]);
