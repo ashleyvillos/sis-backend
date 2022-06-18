@@ -24,6 +24,9 @@ use App\Http\Controllers\TechvocController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\PersonnelController;
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\BillingItemController;
+use App\Http\Controllers\BillingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +45,7 @@ use App\Http\Controllers\PersonnelController;
 
 Route::prefix('v1')->group(function() {
     Route::post('login', [AuthController::class, 'login']);
-
+    
     Route::middleware('auth:api')->group(function () {
         Route::resource('rooms', RoomController::class);
         Route::resource('courses', CourseController::class);
@@ -64,5 +67,9 @@ Route::prefix('v1')->group(function() {
         Route::resource('attendances', AttendanceController::class);
         Route::resource('enrollment', EnrollmentController::class);
         Route::resource('personnels', PersonnelController::class);
+        Route::resource('activities', ActivityController::class);
+        Route::resource('billing_items', BillingItemController::class);
+        Route::resource('billings', BillingController::class);
     });
 });
+

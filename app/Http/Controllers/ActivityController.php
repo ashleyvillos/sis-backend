@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ClassList;
+use App\Models\Activity;
 
 use DB;
 
-class ClassListController extends Controller
+class ActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,16 +17,11 @@ class ClassListController extends Controller
     public function index(Request $request)
     {
         $limit = $request->limit ? $request->limit : 10;
-        $sy = $request->sy;
-        $term_id = $request->term_id;
 
-        $class_lists = ClassList::select('id', 'subject_id', 'room_id', 'teacher_id', 
-        'from', 'to', 'term_id', 'days', 'sy')
-            ->where('term_id', $term_id)
-            ->where('sy', $sy)
-            ->orderBy('id')->paginate($limit);
+        $activities = Activity::select('id', 'name', 'code', 'description', 'form', 'to')
+            ->orderBy('id', 'desc')->paginate($limit);
 
-        return response(['data' => $class_lists, 'limit' => $limit]);
+        return response(['data' => $activities, 'limit' => $limit]);
     }
 
     /**
@@ -47,27 +42,21 @@ class ClassListController extends Controller
      */
     public function store(Request $request)
     {
-        $class_list = new ClassList;
+        $activity = new Activity;
 
-        $subject_id = $request->input('subject_id');
-        $room_id = $request->input('room_id');
-        $teacher_id = $request->input('teacher_id');
+        $name = $request->input('name');
+        $code = $request->input('code');
+        $description = $request->input('description');
         $from = $request->input('from');
         $to = $request->input('to');
-        $days = $request->input('days');
-        $term_id = $request->input('term_id');
-        $sy = $request->input('sy');
 
-        $class_list->subject_id = $subject_id;
-        $class_list->room_id = $room_id;
-        $class_list->teacher_id = $teacher_id;
-        $class_list->from = $from;
-        $class_list->to = $to;
-        $class_list->days = $days;
-        $class_list->term_id = $term_id;
-        $class_list->sy = $sy;
+        $activity->name = $name;
+        $activity->code = $code;
+        $activity->description = $description;
+        $activity->from = $from;
+        $activity->to = $to;
 
-        if ($class_list->save()) {
+        if ($activity->save()) {
             return response(['success' => true]);
         }
 
@@ -105,27 +94,21 @@ class ClassListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $class_list = ClassList::findOrFail($id);
-        
-        $subject_id = $request->input('subject_id');
-        $room_id = $request->input('room_id');
-        $teacher_id = $request->input('teacher_id');
+        $activity = Activity::findOrFail($id);
+
+        $name = $request->input('name');
+        $code = $request->input('code');
+        $description = $request->input('description');
         $from = $request->input('from');
         $to = $request->input('to');
-        $days = $request->input('days');
-        $term_id = $request->input('term_id');
-        $sy = $request->input('sy');
 
-        $class_list->subject_id = $subject_id;
-        $class_list->room_id = $room_id;
-        $class_list->teacher_id = $teacher_id;
-        $class_list->from = $from;
-        $class_list->to = $to;
-        $class_list->days = $days;
-        $class_list->term_id = $term_id;
-        $class_list->sy = $sy;
+        $activity->name = $name;
+        $activity->code = $code;
+        $activity->description = $description;
+        $activity->from = $from;
+        $activity->to = $to;
 
-        if ($class_list->save()) {
+        if ($activity->save()) {
             return response(['success' => true]);
         }
 
@@ -140,7 +123,7 @@ class ClassListController extends Controller
      */
     public function destroy($id)
     {
-        $deleted = DB::table('class_lists')->delete($id);
+        $deleted = DB::table('activities')->delete($id);
 
         if ($deleted) {
             return response(['success' => true]);

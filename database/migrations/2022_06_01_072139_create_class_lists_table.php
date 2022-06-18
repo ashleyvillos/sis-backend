@@ -18,8 +18,9 @@ class CreateClassListsTable extends Migration
             $table->integer('subject_id');
             $table->integer('room_id');
             $table->integer('teacher_id');
-            $table->dateTime('from')->nullable();
-            $table->dateTime('to')->nullable();
+            $table->time('from')->nullable();
+            $table->time('to')->nullable();
+            $table->integer('days')->default(0);
             $table->integer('term_id');
             $table->integer('sy');
             $table->timestamps();

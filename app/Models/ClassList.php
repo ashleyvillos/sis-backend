@@ -15,6 +15,7 @@ class ClassList extends Model
         'teacher_id',
         'from',
         'to',
+        'days',
         'term_id',
         'sy',
     ];

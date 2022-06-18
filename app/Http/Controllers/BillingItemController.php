@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Personnel;
+use App\Models\BillingItem;
 
 use DB;
 
-class PersonnelController extends Controller
+class BillingItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,12 +18,10 @@ class PersonnelController extends Controller
     {
         $limit = $request->limit ? $request->limit : 10;
 
-        $personnels = Personnel::select('personnels.id', 'personnels.firstname', 'personnels.role', 
-            'personnels.lastname', 'personnels.middlename', 'departments.name', 'departments.code')
-            ->leftJoin('departments', 'departments.id', '=', 'personnels.department_id')
+        $billing_items = BillingItem::select('id', 'name', 'code', 'description', 'category', 'cost')
             ->orderBy('id')->paginate($limit);
 
-        return response(['data' => $personnels, 'limit' => $limit]);
+        return response(['data' => $billing_items, 'limit' => $limit]);
     }
 
     /**
@@ -44,21 +42,21 @@ class PersonnelController extends Controller
      */
     public function store(Request $request)
     {
-        $personnel = new Personnel;
+        $billing_item = new BillingItem;
 
-        $firstname = $request->input('firstname');
-        $lastname = $request->input('lastname');
-        $middlename = $request->input('middlename');
-        $role = $request->input('role');
-        $department_id = $request->input('department_id');
+        $name = $request->input('name');
+        $code = $request->input('code');
+        $description = $request->input('description');
+        $category = $request->input('category');
+        $cost = $request->input('cost');
 
-        $personnel->firstname = $firstname;
-        $personnel->lastname = $lastname;
-        $personnel->middlename = $middlename;
-        $personnel->role = $role;
-        $personnel->department_id = $department_id;
+        $billing_item->name = $name;
+        $billing_item->code = $code;
+        $billing_item->description = $description;
+        $billing_item->category = $category;
+        $billing_item->cost = $cost;
 
-        if ($personnel->save()) {
+        if ($billing_item->save()) {
             return response(['success' => true]);
         }
 
@@ -96,21 +94,21 @@ class PersonnelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $personnel = Personnel::findOrFail($id);;
-        
-        $firstname = $request->input('firstname');
-        $lastname = $request->input('lastname');
-        $middlename = $request->input('middlename');
-        $role = $request->input('role');
-        $department_id = $request->input('department_id');
+        $billing_item = BillingItem::findOrFail($id);
 
-        $personnel->firstname = $firstname;
-        $personnel->lastname = $lastname;
-        $personnel->middlename = $middlename;
-        $personnel->role = $role;
-        $personnel->department_id = $department_id;
+        $name = $request->input('name');
+        $code = $request->input('code');
+        $description = $request->input('description');
+        $category = $request->input('category');
+        $cost = $request->input('cost');
 
-        if ($personnel->save()) {
+        $billing_item->name = $name;
+        $billing_item->code = $code;
+        $billing_item->description = $description;
+        $billing_item->category = $category;
+        $billing_item->cost = $cost;
+
+        if ($billing_item->save()) {
             return response(['success' => true]);
         }
 
@@ -125,7 +123,7 @@ class PersonnelController extends Controller
      */
     public function destroy($id)
     {
-        $deleted = DB::table('personnels')->delete($id);
+        $deleted = DB::table('billing_items')->delete($id);
 
         if ($deleted) {
             return response(['success' => true]);
