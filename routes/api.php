@@ -23,6 +23,7 @@ use App\Http\Controllers\MadarisController;
 use App\Http\Controllers\TechvocController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\EnrollmentController;
+use App\Http\Controllers\PersonnelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +42,7 @@ use App\Http\Controllers\EnrollmentController;
 
 Route::prefix('v1')->group(function() {
     Route::post('login', [AuthController::class, 'login']);
-    
+
     Route::middleware('auth:api')->group(function () {
         Route::resource('rooms', RoomController::class);
         Route::resource('courses', CourseController::class);
@@ -62,6 +63,6 @@ Route::prefix('v1')->group(function() {
         Route::resource('techvoc', TechvocController::class);
         Route::resource('attendances', AttendanceController::class);
         Route::resource('enrollment', EnrollmentController::class);
+        Route::resource('personnels', PersonnelController::class);
     });
 });
-

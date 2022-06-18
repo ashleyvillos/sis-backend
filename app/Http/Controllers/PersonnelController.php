@@ -18,7 +18,7 @@ class PersonnelController extends Controller
     {
         $limit = $request->limit ? $request->limit : 10;
 
-        $personnels = Personnel::select('personnels.id', 'personnels.firstname', 
+        $personnels = Personnel::select('personnels.id', 'personnels.firstname',
             'personnels.lastname', 'personnels.middlename', 'departments.name', 'departments.code')
             ->leftJoin('departments', 'departments.id', '=', 'personnels.department_id')
             ->orderBy('id')->paginate($limit);
@@ -94,8 +94,8 @@ class PersonnelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $personnel = new Personnel;
-        
+        $personnel = Personnel::findOrFail($id);;
+
         $firstname = $request->input('firstname');
         $lastname = $request->input('lastname');
         $middlename = $request->input('middlename');
