@@ -16,12 +16,25 @@ class GradeController extends Controller
      */
     public function index(Request $request)
     {
-        $limit = $request->limit ? $request->limit : 10;
+        $term_id = $request->term_id ? $request->term_id : 0;
+        $sy = $request->sy ? $request->sy : 0;
+        $student_id = $request->student_id ? $request->student_id : 0;
 
-        $grades = Grade::select('*')
-            ->orderBy('id')->paginate($limit);
+        if ($student_id && $term_id && $sy) {
+            $grades = Grade::select('grades.grade', 'grading_periods.name as grading_period', 
+                'subjects.name as subject')
+                ->leftJoin('class_lists', 'class_lists.id', '=', 'grades.class_list_id')
+                ->leftJoin('subjects', 'subjects.id', '=', 'class_lists.subject_id')
+                ->leftJoin('grading_periods', 'grading_periods.id', '=', 'grades.grading_period_id')
+                ->where('class_lists.term_id', $term_id)
+                ->where('class_lists.sy', $sy)
+                ->where('grades.student_id', $student_id)
+                ->get();
 
-        return response(['data' => $grades, 'limit' => $limit]);
+                return response(['success' => true, 'data' => $grades]);
+        }
+
+        return response(['success' => false, 'data' => []]);
     }
 
     /**
@@ -46,6 +59,7 @@ class GradeController extends Controller
 
         $student_id = $request->input('student_id');
         $class_list_id = $request->input('class_list_id');
+        $grading_period_id = $request->input('grading_period_id');
         $grades = $request->input('grade');
 
         $grade->student_id = $student_id;
