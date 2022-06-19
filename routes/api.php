@@ -27,6 +27,7 @@ use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\BillingItemController;
 use App\Http\Controllers\BillingController;
+use App\Http\Controllers\GradingPeriodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +71,7 @@ Route::prefix('v1')->group(function() {
         Route::resource('activities', ActivityController::class);
         Route::resource('billing_items', BillingItemController::class);
         Route::resource('billings', BillingController::class);
+        Route::resource('grading_periods', GradingPeriodController::class);
     });
 });
 
