@@ -17,6 +17,7 @@ class BillingController extends Controller
     public function index(Request $request)
     {
         $limit = $request->limit ? $request->limit : 10;
+        $enrollment_id = $request->enrollment_id ? $request->enrollment_id : 0;
 
         $billings = Billing::select(
         'billings.id', 'billings.enrollment_id', 'billings.billing_items_id', 
@@ -41,8 +42,13 @@ class BillingController extends Controller
         ->leftJoin('basic_education', 'basic_education.id', '=', 'students.basic_education_id')
         ->leftJoin('madaris', 'madaris.id', '=', 'students.madaris_id')
         ->leftJoin('higher_education', 'higher_education.id', '=', 'students.higher_education_id')
-        ->leftJoin('techvocs', 'techvocs.id', '=', 'students.techvoc_id')
-        ->orderBy('enrollments.created_at', 'desc')->paginate($limit);
+        ->leftJoin('techvocs', 'techvocs.id', '=', 'students.techvoc_id');
+
+        if ($enrollment_id > 0) {
+            $billings = $billings->where('enrollments.id', $enrollment_id);
+        }
+
+        $billings = $billings->orderBy('enrollments.created_at', 'desc')->paginate($limit);
 
         return response(['data' => $billings, 'limit' => $limit]);
     }
@@ -65,23 +71,29 @@ class BillingController extends Controller
      */
     public function store(Request $request)
     {
-        $billing = new Billing;
+        // $billing = new Billing;
 
-        $enrollment_id = $request->input('enrollment_id');
-        $billing_items_id = $request->input('billing_items_id');
-        $debit = $request->input('debit');
-        $credit = $request->input('credit');
+        // $enrollment_id = $request->input('enrollment_id');
+        // $billing_items_id = $request->input('billing_items_id');
+        // $debit = $request->input('debit');
+        // $credit = $request->input('credit');
 
-        $billing->enrollment_id = $enrollment_id;
-        $billing->billing_items_id = $billing_items_id;
-        $billing->debit = $debit;
-        $billing->credit = $credit;
+        // $billing->enrollment_id = $enrollment_id;
+        // $billing->billing_items_id = $billing_items_id;
+        // $billing->debit = $debit;
+        // $billing->credit = $credit;
 
-        if ($billing->save()) {
+        $data = $request->data;
+
+        // if ($data)
+        if ($data && Billing::insert($data)) {
             return response(['success' => true]);
         }
 
         return response(['success' => false]);
+        // return response(['success' => $request->data]);
+
+        
     }
 
     /**
@@ -115,20 +127,29 @@ class BillingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $billing = Billing::findOrFail($id);
+        // $billing = Billing::findOrFail($id);
 
-        $enrollment_id = $request->input('enrollment_id');
-        $billing_items_id = $request->input('billing_items_id');
-        $debit = $request->input('debit');
-        $credit = $request->input('credit');
+        // $enrollment_id = $request->input('enrollment_id');
+        // $billing_items_id = $request->input('billing_items_id');
+        // $debit = $request->input('debit');
+        // $credit = $request->input('credit');
 
-        $billing->enrollment_id = $enrollment_id;
-        $billing->billing_items_id = $billing_items_id;
-        $billing->debit = $debit;
-        $billing->credit = $credit;
+        // $billing->enrollment_id = $enrollment_id;
+        // $billing->billing_items_id = $billing_items_id;
+        // $billing->debit = $debit;
+        // $billing->credit = $credit;
 
-        if ($billing->save()) {
-            return response(['success' => true]);
+        // if ($billing->save()) {
+        //     return response(['success' => true]);
+        // }
+
+        $data = $request->data;
+
+        if ($data) {
+            $deleted = Billing::where('enrollment_id', $id)->delete();
+            if (Billing::insert($data)) {
+                return response(['success' => true]);
+            }
         }
 
         return response(['success' => false]);

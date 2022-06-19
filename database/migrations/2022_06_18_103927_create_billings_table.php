@@ -17,8 +17,8 @@ class CreateBillingsTable extends Migration
             $table->id();
             $table->integer('enrollment_id');
             $table->integer('billing_items_id');
-            $table->decimal('debit');
-            $table->decimal('credit');
+            $table->decimal('debit')->default(0);
+            $table->decimal('credit')->default(0);
             $table->timestamps();
         });
     }

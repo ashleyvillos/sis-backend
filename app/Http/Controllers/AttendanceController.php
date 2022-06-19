@@ -17,6 +17,7 @@ class AttendanceController extends Controller
     public function index(Request $request)
     {
         $limit = $request->limit ? $request->limit : 10;
+        $id = $request->id ? $request->id : 0;
 
         $attendances = Attendance::select('students.id', 'attendances.login', 'attendances.logout',
             'basic_education.lastname as basic_education_lastname', 'basic_education.firstname as basic_education_firstname',
@@ -31,8 +32,13 @@ class AttendanceController extends Controller
             ->leftJoin('basic_education', 'basic_education.id', '=', 'students.basic_education_id')
             ->leftJoin('madaris', 'madaris.id', '=', 'students.madaris_id')
             ->leftJoin('higher_education', 'higher_education.id', '=', 'students.higher_education_id')
-            ->leftJoin('techvocs', 'techvocs.id', '=', 'students.techvoc_id')
-            ->orderBy('id')->paginate($limit);
+            ->leftJoin('techvocs', 'techvocs.id', '=', 'students.techvoc_id');
+
+        if ($id > 0) {
+            $attendances = $attendances->where('students.id', $id);
+        }
+
+        $attendances = $attendances->orderBy('attendances.id', 'desc')->paginate($limit);
 
         return response(['data' => $attendances, 'limit' => $limit]);
     }
@@ -59,7 +65,7 @@ class AttendanceController extends Controller
 
         $attendance = Attendance::select('*')
             ->where('student_id', $student_id)
-            ->whereRaw("DATE(created_at) = CURDATE()")
+            ->whereRaw("DATE(created_at) = \"" . date("Y-m-d") . "\"")
             ->first();
 
         if ($attendance) {

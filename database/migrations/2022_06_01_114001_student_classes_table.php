@@ -15,8 +15,9 @@ class StudentClassesTable extends Migration
     {
         Schema::create('student_classes', function (Blueprint $table) {
             $table->id();
-            $table->string('class_list_id');
-            $table->string('student_id');
+            $table->integer('class_list_id');
+            $table->integer('student_id');
+            $table->integer('enrollment_id');
             $table->timestamps();
         });
     }
