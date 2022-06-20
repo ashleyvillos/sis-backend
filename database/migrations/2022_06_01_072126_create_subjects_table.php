@@ -19,6 +19,7 @@ class CreateSubjectsTable extends Migration
             $table->string('code')->nullable();
             $table->string('description')->nullable();
             $table->decimal('cost')->default(0);
+            $table->decimal('units')->default(0);
             $table->timestamps();
         });
     }

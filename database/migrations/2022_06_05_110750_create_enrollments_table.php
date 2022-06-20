@@ -19,6 +19,7 @@ class CreateEnrollmentsTable extends Migration
             $table->string('term_id');
             $table->string('student_id');
             $table->string('course_id');
+            $table->string('year_level');
             $table->timestamps();
         });
     }

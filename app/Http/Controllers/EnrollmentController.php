@@ -22,7 +22,7 @@ class EnrollmentController extends Controller
         $sy = $request->sy? $request->sy : 0;
         $student_id = $request->student_id? $request->student_id : 0;
 
-        $enrollments = Enrollment::select('enrollments.id', 'enrollments.sy', 
+        $enrollments = Enrollment::select('enrollments.id', 'enrollments.sy', 'enrollments.year_level', 
             'terms.name as term', 'courses.name as course', 'students.id',
             'basic_education.lastname as basic_education_lastname', 'basic_education.firstname as basic_education_firstname', 
             'basic_education.middlename as basic_education_middlename', 'basic_education.gender as basic_education_gender',
@@ -99,11 +99,13 @@ class EnrollmentController extends Controller
         $term_id = $request->input('term_id');
         $student_id = $request->input('student_id');
         $course_id = $request->input('course_id');
+        $year_level = $request->input('year_level');
 
         $enrollment->sy = $sy;
         $enrollment->term_id = $term_id;
         $enrollment->student_id = $student_id;
         $enrollment->course_id = $course_id;
+        $enrollment->year_level = $year_level;
 
         if ($enrollment->save()) {
             return response(['success' => true, 'id' => $enrollment->id]);
@@ -149,11 +151,13 @@ class EnrollmentController extends Controller
         $term_id = $request->input('term_id');
         $student_id = $request->input('student_id');
         $course_id = $request->input('course_id');
+        $year_level = $request->input('year_level');
 
         $enrollment->sy = $sy;
         $enrollment->term_id = $term_id;
         $enrollment->student_id = $student_id;
         $enrollment->course_id = $course_id;
+        $enrollment->year_level = $year_level;
 
         if ($enrollment->save()) {
             return response(['success' => true]);

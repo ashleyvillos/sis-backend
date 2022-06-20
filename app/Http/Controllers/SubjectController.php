@@ -18,7 +18,7 @@ class SubjectController extends Controller
     {
         $limit = $request->limit ? $request->limit : 10;
 
-        $subjects = Subject::select('id', 'name', 'code', 'description', 'cost')
+        $subjects = Subject::select('id', 'name', 'code', 'description', 'cost', 'units')
             ->orderBy('id')->paginate($limit);
 
         return response(['data' => $subjects, 'limit' => $limit]);
@@ -48,11 +48,13 @@ class SubjectController extends Controller
         $code = $request->input('code');
         $description = $request->input('description');
         $cost = $request->input('cost');
+        $units = $request->input('units');
 
         $subject->name = $name;
         $subject->code = $code;
         $subject->description = $description;
         $subject->cost = $cost;
+        $subject->units = $units;
 
         if ($subject->save()) {
             return response(['success' => true]);
@@ -98,11 +100,13 @@ class SubjectController extends Controller
         $code = $request->input('code');
         $description = $request->input('description');
         $cost = $request->input('cost');
+        $units = $request->input('units');
 
         $subject->name = $name;
         $subject->code = $code;
         $subject->description = $description;
         $subject->cost = $cost;
+        $subject->units = $units;
 
         if ($subject->save()) {
             return response(['success' => true]);
