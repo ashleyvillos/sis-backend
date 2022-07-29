@@ -13,6 +13,7 @@ class Enrollment extends Model
         'sy',
         'term_id',
         'student_id',
-        'course_id'
+        'course_id',
+        'year_level'
     ];
 }

@@ -20,7 +20,7 @@ class ClassListController extends Controller
         $sy = $request->sy;
         $term_id = $request->term_id;
 
-        $class_lists = ClassList::select('id', 'subject_id', 'room_id', 'teacher_id',
+        $class_lists = ClassList::select('id', 'subject_id', 'room_id', 'teacher_id', 
         'from', 'to', 'term_id', 'days', 'sy')
             ->where('term_id', $term_id)
             ->where('sy', $sy)
@@ -106,7 +106,7 @@ class ClassListController extends Controller
     public function update(Request $request, $id)
     {
         $class_list = ClassList::findOrFail($id);
-
+        
         $subject_id = $request->input('subject_id');
         $room_id = $request->input('room_id');
         $teacher_id = $request->input('teacher_id');

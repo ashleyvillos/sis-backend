@@ -93,7 +93,7 @@ class LibraryController extends Controller
     public function update(Request $request, $id)
     {
         $library = Library::findOrFail($id);
-
+        
         $name = $request->input('name');
         $code = $request->input('code');
         $description = $request->input('description');

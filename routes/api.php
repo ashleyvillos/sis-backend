@@ -28,6 +28,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\BillingItemController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\GradingPeriodController;
+use App\Http\Controllers\StudentLogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,9 @@ Route::prefix('v1')->group(function() {
         Route::resource('billing_items', BillingItemController::class);
         Route::resource('billings', BillingController::class);
         Route::resource('grading_periods', GradingPeriodController::class);
+        Route::resource('student_logs', StudentLogController::class);
+
+        Route::post('basic_education/{id}', [BasicEducationController::class, 'updateForm']);
     });
 });
 

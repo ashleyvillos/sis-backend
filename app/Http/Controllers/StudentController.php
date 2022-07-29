@@ -26,32 +26,31 @@ class StudentController extends Controller
         $students = [];
 
         if ($basic_education_id) {
-            $students = Student::select('students.id', 'basic_education.firstname', 'basic_education.lastname',
-                'basic_education.middlename', 'basic_education.gender')
+            $students = Student::select('students.id', 'basic_education.firstname', 'basic_education.lastname', 
+                'basic_education.middlename', 'basic_education.gender', 'basic_education.id as basic_education_id')
                 ->leftJoin('basic_education', 'students.basic_education_id', '=', 'basic_education.id')
-                // ->where('students.basic_education_id', '>', 0)
+                ->where('students.basic_education_id', '>', 0)
                 ->orderBy('lastname')->paginate($limit);
         } else if ($madaris_id) {
-            $students = Student::select('students.id', 'students.madaris_id','madaris.firstname', 'madaris.lastname',
-                'madaris.middlename', 'madaris.gender')
+            $students = Student::select('students.id', 'madaris.firstname', 'madaris.lastname', 
+                'madaris.middlename', 'madaris.gender', 'madaris.id as madaris_id')
                 ->leftJoin('madaris', 'students.madaris_id', '=', 'madaris.id')
-                // ->where('students.madaris_id', '>', 0)
+                ->where('students.madaris_id', '>', 0)
                 ->orderBy('lastname')->paginate($limit);
         } else if ($higher_education_id) {
-            $students = Student::select('students.id', 'higher_education.firstname', 'higher_education.lastname',
-                'higher_education.middlename', 'higher_education.gender')
+            $students = Student::select('students.id', 'higher_education.firstname', 'higher_education.lastname', 
+                'higher_education.middlename', 'higher_education.gender', 'higher_education.id as higher_education_id')
                 ->leftJoin('higher_education', 'students.higher_education_id', '=', 'higher_education.id')
-                // ->where('students.higher_education_id', '>', 0)
+                ->where('students.higher_education_id', '>', 0)
                 ->orderBy('lastname')->paginate($limit);
         } else if ($techvoc_id) {
-            $students = Student::select('students.id', 'students.techvoc_id', 'techvocs.firstname', 'techvocs.lastname',
-                'techvocs.middlename', 'techvocs.gender')
+            $students = Student::select('students.id', 'techvocs.firstname', 'techvocs.lastname', 
+                'techvocs.middlename', 'techvocs.gender', 'techvocs.id as techvocs_id')
                 ->leftJoin('techvocs', 'students.techvoc_id', '=', 'techvocs.id')
-                // ->where('students.techvoc_id', '>', $techvoc_id)
                 ->where('students.techvoc_id', '>', 0)
                 ->orderBy('lastname')->paginate($limit);
         }
-
+        
         return response(['data' => $students, 'limit' => $limit]);
     }
 
@@ -124,7 +123,7 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         $student = Student::findOrFail($id);
-
+        
         $basic_education_id = $request->input('basic_education_id');
         $madaris_id = $request->input('madaris_id');
         $higher_education_id = $request->input('higher_education_id');

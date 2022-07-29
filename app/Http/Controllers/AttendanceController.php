@@ -19,14 +19,14 @@ class AttendanceController extends Controller
         $limit = $request->limit ? $request->limit : 10;
         $id = $request->id ? $request->id : 0;
 
-        $attendances = Attendance::select('students.id', 'attendances.login', 'attendances.logout',
-            'basic_education.lastname as basic_education_lastname', 'basic_education.firstname as basic_education_firstname',
+        $attendances = Attendance::select('students.id', 'attendances.login', 'attendances.logout', 
+            'basic_education.lastname as basic_education_lastname', 'basic_education.firstname as basic_education_firstname', 
             'basic_education.middlename as basic_education_middlename', 'basic_education.gender as basic_education_gender',
-            'madaris.lastname as madaris_lastname', 'madaris.firstname as madaris_firstname',
+            'madaris.lastname as madaris_lastname', 'madaris.firstname as madaris_firstname', 
             'madaris.middlename as madaris_middlename', 'madaris.gender as madaris_gender',
-            'higher_education.lastname as higher_education_lastname', 'higher_education.firstname as higher_education_firstname',
+            'higher_education.lastname as higher_education_lastname', 'higher_education.firstname as higher_education_firstname', 
             'higher_education.middlename as higher_education_middlename', 'higher_education.gender as higher_education_gender',
-            'techvocs.lastname as techvocs_lastname', 'techvocs.firstname as techvocs_firstname',
+            'techvocs.lastname as techvocs_lastname', 'techvocs.firstname as techvocs_firstname', 
             'techvocs.middlename as techvocs_middlename', 'techvocs.gender as techvocs_gender')
             ->leftJoin('students', 'students.id', '=', 'attendances.student_id')
             ->leftJoin('basic_education', 'basic_education.id', '=', 'students.basic_education_id')

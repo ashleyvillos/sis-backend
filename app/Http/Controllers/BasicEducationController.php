@@ -7,6 +7,8 @@ use App\Models\BasicEducation;
 
 use DB;
 
+use Illuminate\Support\Facades\Storage;
+
 class BasicEducationController extends Controller
 {
     /**
@@ -39,91 +41,84 @@ class BasicEducationController extends Controller
     {
         $basic_education = new BasicEducation;
 
-        $birth_certificate_no = $request->input('birth_certificate_no');
-        $learner_reference_number = $request->input('learner_reference_number');
         $lastname = $request->input('lastname');
         $firstname = $request->input('firstname');
         $middlename = $request->input('middlename');
         $extension = $request->input('extension');
         $birthdate = $request->input('birthdate');
         $gender = $request->input('gender');
-        $ip_community = $request->input('ip_community');
-        $mother_tongue = $request->input('mother_tongue');
-        $house_no = $request->input('house_no');
-        $street = $request->input('street');
-        $baranggay = $request->input('baranggay');
-        $city = $request->input('city');
-        $municipality = $request->input('municipality');
-        $province = $request->input('province');
-        $country = $request->input('country');
-        $zipcode = $request->input('zipcode');
-        $father_lastname = $request->input('father_lastname');
-        $father_firstname = $request->input('father_firstname');
-        $father_middlename = $request->input('father_middlename');
-        $father_mobile = $request->input('father_mobile');
-        $father_phone = $request->input('father_phone');
-        $mother_lastname = $request->input('mother_lastname');
-        $mother_firstname = $request->input('mother_firstname');
-        $mother_middlename = $request->input('mother_middlename');
-        $mother_mobile = $request->input('mother_mobile');
-        $mother_phone = $request->input('mother_phone');
-        $guardian_lastname = $request->input('guardian_lastname');
-        $guardian_firstname = $request->input('guardian_firstname');
-        $guardian_middlename = $request->input('guardian_middlename');
-        $guardian_mobile = $request->input('guardian_mobile');
-        $guardian_phone = $request->input('guardian_phone');
-        $last_grade_level_completed = $request->input('last_grade_level_completed');
-        $last_school_year_completed = $request->input('last_school_year_completed');
-        $school_name = $request->input('school_name');
-        $school_id = $request->input('school_id');
-        $school_address = $request->input('school_address');
-        $semester = $request->input('semester');
-        $track = $request->input('track');
-        $strand = $request->input('strand');
-        $status = $request->input('status');
+        // $image = $request->input('image');
+        $marital_status = $request->input('marital_status');
+        $spouse_name = $request->input('spouse_name');
+        $student_children_num = $request->input('student_children_num');
+        $is_orphan = $request->input('is_orphan');
+        $medical_condition = $request->input('medical_condition');
+        $hobby = $request->input('hobby');
+        $student_affiliation = $request->input('student_affiliation');
+        $blood_type = $request->input('blood_type');
+        $brothers_num = $request->input('brothers_num');
+        $sisters_num = $request->input('sisters_num');
+        $is_balik_aral = $request->input('is_balik_aral');
+        $is_4p_beneficiary = $request->input('is_4p_beneficiary');
+        $parent_affiliation = $request->input('parent_affiliation');
+        $position = $request->input('position');
+        $years_of_service = $request->input('years_of_service');
+        $educational_background = $request->input('educational_background');
+        $monthly_income = $request->input('monthly_income');
+        $source_of_income = $request->input('source_of_income');
+        $has_real_property = $request->input('has_real_property');
+        $has_personal_property = $request->input('has_personal_property');
+        $has_house = $request->input('has_house');
+        $contact_num = $request->input('contact_num');
+        $parent_children_num = $request->input('parent_children_num');
+        $dependents_num = $request->input('dependents_num');
+        $mode_of_transport = $request->input('mode_of_transport');
+        $school_distance = $request->input('school_distance');
+        $peace_condition = $request->input('peace_condition');
+        $address = $request->input('address');
+        $business_interest = $request->input('business_interest');
 
-        $basic_education->birth_certificate_no = $birth_certificate_no;
-        $basic_education->learner_reference_number = $learner_reference_number;
         $basic_education->lastname = $lastname;
         $basic_education->firstname = $firstname;
         $basic_education->middlename = $middlename;
         $basic_education->extension = $extension;
         $basic_education->birthdate = $birthdate;
         $basic_education->gender = $gender;
-        $basic_education->ip_community = $ip_community;
-        $basic_education->mother_tongue = $mother_tongue;
-        $basic_education->house_no = $house_no;
-        $basic_education->street = $street;
-        $basic_education->baranggay = $baranggay;
-        $basic_education->city = $city;
-        $basic_education->municipality = $municipality;
-        $basic_education->province = $province;
-        $basic_education->country = $country;
-        $basic_education->zipcode = $zipcode;
-        $basic_education->father_lastname = $father_lastname;
-        $basic_education->father_firstname = $father_firstname;
-        $basic_education->father_middlename = $father_middlename;
-        $basic_education->father_mobile = $father_mobile;
-        $basic_education->father_phone = $father_phone;
-        $basic_education->mother_lastname = $mother_lastname;
-        $basic_education->mother_firstname = $mother_firstname;
-        $basic_education->mother_middlename = $mother_middlename;
-        $basic_education->mother_mobile = $mother_mobile;
-        $basic_education->mother_phone = $mother_phone;
-        $basic_education->guardian_lastname = $guardian_lastname;
-        $basic_education->guardian_firstname = $guardian_firstname;
-        $basic_education->guardian_middlename = $guardian_middlename;
-        $basic_education->guardian_mobile = $guardian_mobile;
-        $basic_education->guardian_phone = $guardian_phone;
-        $basic_education->last_grade_level_completed = $last_grade_level_completed;
-        $basic_education->last_school_year_completed = $last_school_year_completed;
-        $basic_education->school_name = $school_name;
-        $basic_education->school_id = $school_id;
-        $basic_education->school_address = $school_address;
-        $basic_education->semester = $semester;
-        $basic_education->track = $track;
-        $basic_education->strand = $strand;
-        $basic_education->status = $status;
+        // $basic_education->image = $image;
+        $basic_education->marital_status = $marital_status;
+        $basic_education->spouse_name = $spouse_name;
+        $basic_education->student_children_num = $student_children_num;
+        $basic_education->is_orphan = $is_orphan;
+        $basic_education->medical_condition = $medical_condition;
+        $basic_education->hobby = $hobby;
+        $basic_education->student_affiliation = $student_affiliation;
+        $basic_education->blood_type = $blood_type;
+        $basic_education->brothers_num = $brothers_num;
+        $basic_education->sisters_num = $sisters_num;
+        $basic_education->is_balik_aral = $is_balik_aral;
+        $basic_education->is_4p_beneficiary = $is_4p_beneficiary;
+        $basic_education->parent_affiliation = $parent_affiliation;
+        $basic_education->position = $position;
+        $basic_education->years_of_service = $years_of_service;
+        $basic_education->educational_background = $educational_background;
+        $basic_education->monthly_income = $monthly_income;
+        $basic_education->source_of_income = $source_of_income;
+        $basic_education->has_real_property = $has_real_property;
+        $basic_education->has_personal_property = $has_personal_property;
+        $basic_education->has_house = $has_house;
+        $basic_education->contact_num = $contact_num;
+        $basic_education->parent_children_num = $parent_children_num;
+        $basic_education->dependents_num = $dependents_num;
+        $basic_education->mode_of_transport = $mode_of_transport;
+        $basic_education->school_distance = $school_distance;
+        $basic_education->peace_condition = $peace_condition;
+        $basic_education->address = $address;
+        $basic_education->business_interest = $business_interest;
+
+        if ($file = $request->file('file')) {
+            $file = $request->file->store('public/documents');
+            $basic_education->image = $file;
+        }
 
         if ($basic_education->save()) {
             return response(['success' => true, 'id' => $basic_education->id]);
@@ -168,93 +163,182 @@ class BasicEducationController extends Controller
     {
         $basic_education = BasicEducation::findOrFail($id);
 
-        $birth_certificate_no = $request->input('birth_certificate_no');
-        $learner_reference_number = $request->input('learner_reference_number');
         $lastname = $request->input('lastname');
         $firstname = $request->input('firstname');
         $middlename = $request->input('middlename');
         $extension = $request->input('extension');
         $birthdate = $request->input('birthdate');
         $gender = $request->input('gender');
-        $ip_community = $request->input('ip_community');
-        $mother_tongue = $request->input('mother_tongue');
-        $house_no = $request->input('house_no');
-        $street = $request->input('street');
-        $baranggay = $request->input('baranggay');
-        $city = $request->input('city');
-        $municipality = $request->input('municipality');
-        $province = $request->input('province');
-        $country = $request->input('country');
-        $zipcode = $request->input('zipcode');
-        $father_lastname = $request->input('father_lastname');
-        $father_firstname = $request->input('father_firstname');
-        $father_middlename = $request->input('father_middlename');
-        $father_mobile = $request->input('father_mobile');
-        $father_phone = $request->input('father_phone');
-        $mother_lastname = $request->input('mother_lastname');
-        $mother_firstname = $request->input('mother_firstname');
-        $mother_middlename = $request->input('mother_middlename');
-        $mother_mobile = $request->input('mother_mobile');
-        $mother_phone = $request->input('mother_phone');
-        $guardian_lastname = $request->input('guardian_lastname');
-        $guardian_firstname = $request->input('guardian_firstname');
-        $guardian_middlename = $request->input('guardian_middlename');
-        $guardian_mobile = $request->input('guardian_mobile');
-        $guardian_phone = $request->input('guardian_phone');
-        $last_grade_level_completed = $request->input('last_grade_level_completed');
-        $last_school_year_completed = $request->input('last_school_year_completed');
-        $school_name = $request->input('school_name');
-        $school_id = $request->input('school_id');
-        $school_address = $request->input('school_address');
-        $semester = $request->input('semester');
-        $track = $request->input('track');
-        $strand = $request->input('strand');
-        $status = $request->input('status');
+        // $image = $request->input('image');
+        $marital_status = $request->input('marital_status');
+        $spouse_name = $request->input('spouse_name');
+        $student_children_num = $request->input('student_children_num');
+        $is_orphan = $request->input('is_orphan');
+        $medical_condition = $request->input('medical_condition');
+        $hobby = $request->input('hobby');
+        $student_affiliation = $request->input('student_affiliation');
+        $blood_type = $request->input('blood_type');
+        $brothers_num = $request->input('brothers_num');
+        $sisters_num = $request->input('sisters_num');
+        $is_balik_aral = $request->input('is_balik_aral');
+        $is_4p_beneficiary = $request->input('is_4p_beneficiary');
+        $parent_affiliation = $request->input('parent_affiliation');
+        $position = $request->input('position');
+        $years_of_service = $request->input('years_of_service');
+        $educational_background = $request->input('educational_background');
+        $monthly_income = $request->input('monthly_income');
+        $source_of_income = $request->input('source_of_income');
+        $has_real_property = $request->input('has_real_property');
+        $has_personal_property = $request->input('has_personal_property');
+        $has_house = $request->input('has_house');
+        $contact_num = $request->input('contact_num');
+        $parent_children_num = $request->input('parent_children_num');
+        $dependents_num = $request->input('dependents_num');
+        $mode_of_transport = $request->input('mode_of_transport');
+        $school_distance = $request->input('school_distance');
+        $peace_condition = $request->input('peace_condition');
+        $address = $request->input('address');
+        $business_interest = $request->input('business_interest');
 
-        $basic_education->birth_certificate_no = $birth_certificate_no;
-        $basic_education->learner_reference_number = $learner_reference_number;
-        $basic_education->lastname = $lastname;
-        $basic_education->firstname = $firstname;
-        $basic_education->middlename = $middlename;
-        $basic_education->extension = $extension;
-        $basic_education->birthdate = $birthdate;
-        $basic_education->gender = $gender;
-        $basic_education->ip_community = $ip_community;
-        $basic_education->mother_tongue = $mother_tongue;
-        $basic_education->house_no = $house_no;
-        $basic_education->street = $street;
-        $basic_education->baranggay = $baranggay;
-        $basic_education->city = $city;
-        $basic_education->municipality = $municipality;
-        $basic_education->province = $province;
-        $basic_education->country = $country;
-        $basic_education->zipcode = $zipcode;
-        $basic_education->father_lastname = $father_lastname;
-        $basic_education->father_firstname = $father_firstname;
-        $basic_education->father_middlename = $father_middlename;
-        $basic_education->father_mobile = $father_mobile;
-        $basic_education->father_phone = $father_phone;
-        $basic_education->mother_lastname = $mother_lastname;
-        $basic_education->mother_firstname = $mother_firstname;
-        $basic_education->mother_middlename = $mother_middlename;
-        $basic_education->mother_mobile = $mother_mobile;
-        $basic_education->mother_phone = $mother_phone;
-        $basic_education->guardian_lastname = $guardian_lastname;
-        $basic_education->guardian_firstname = $guardian_firstname;
-        $basic_education->guardian_middlename = $guardian_middlename;
-        $basic_education->guardian_mobile = $guardian_mobile;
-        $basic_education->guardian_phone = $guardian_phone;
-        $basic_education->last_grade_level_completed = $last_grade_level_completed;
-        $basic_education->last_school_year_completed = $last_school_year_completed;
-        $basic_education->school_name = $school_name;
-        $basic_education->school_id = $school_id;
-        $basic_education->school_address = $school_address;
-        $basic_education->semester = $semester;
-        $basic_education->track = $track;
-        $basic_education->strand = $strand;
-        $basic_education->status = $status;
+        $filename = $basic_education->image;
+
+        $basic_education->lastname = $lastname ? $lastname : $basic_education->lastname;
+        $basic_education->firstname = $firstname ? $firstname : $basic_education->firstname;
+        $basic_education->middlename = $middlename ? $middlename : $basic_education->middlename;
+        $basic_education->extension = $extension ? $extension : $basic_education->extension;
+        $basic_education->birthdate = $birthdate ? $birthdate : $basic_education->birthdate;
+        $basic_education->gender = $gender ? $gender : $basic_education->gender;
+        $basic_education->marital_status = $marital_status ? $marital_status : $basic_education->marital_status;
+        $basic_education->spouse_name = $spouse_name ? $spouse_name : $basic_education->spouse_name;
+        $basic_education->student_children_num = $student_children_num ? $student_children_num : $basic_education->student_children_num;
+        $basic_education->is_orphan = $is_orphan ? $is_orphan : $basic_education->is_orphan;
+        $basic_education->medical_condition = $medical_condition ? $medical_condition : $basic_education->medical_condition;
+        $basic_education->hobby = $hobby ? $hobby : $basic_education->hobby;
+        $basic_education->student_affiliation = $student_affiliation ? $student_affiliation : $basic_education->student_affiliation;
+        $basic_education->blood_type = $blood_type ? $blood_type : $basic_education->blood_type;
+        $basic_education->brothers_num = $brothers_num ? $brothers_num : $basic_education->brothers_num;
+        $basic_education->sisters_num = $sisters_num ? $sisters_num : $basic_education->sisters_num;
+        $basic_education->is_balik_aral = $is_balik_aral ? $is_balik_aral : $basic_education->is_balik_aral;
+        $basic_education->is_4p_beneficiary = $is_4p_beneficiary ? $is_4p_beneficiary : $basic_education->is_4p_beneficiary;
+        $basic_education->parent_affiliation = $parent_affiliation ? $parent_affiliation : $basic_education->parent_affiliation;
+        $basic_education->position = $position ? $position : $basic_education->position;
+        $basic_education->years_of_service = $years_of_service ? $years_of_service : $basic_education->years_of_service;
+        $basic_education->educational_background = $educational_background ? $educational_background : $basic_education->educational_background;
+        $basic_education->monthly_income = $monthly_income ? $monthly_income : $basic_education->monthly_income;
+        $basic_education->source_of_income = $source_of_income ? $source_of_income : $basic_education->source_of_income;
+        $basic_education->has_real_property = $has_real_property ? $has_real_property : $basic_education->has_real_property;
+        $basic_education->has_personal_property = $has_personal_property ? $has_personal_property : $basic_education->has_personal_property;
+        $basic_education->has_house = $has_house ? $has_house : $basic_education->has_house;
+        $basic_education->contact_num = $contact_num ? $contact_num : $basic_education->contact_num;
+        $basic_education->parent_children_num = $parent_children_num ? $parent_children_num : $basic_education->parent_children_num;
+        $basic_education->dependents_num = $dependents_num ? $dependents_num : $basic_education->dependents_num;
+        $basic_education->mode_of_transport = $mode_of_transport ? $mode_of_transport : $basic_education->mode_of_transport;
+        $basic_education->school_distance = $school_distance ? $school_distance : $basic_education->school_distance;
+        $basic_education->peace_condition = $peace_condition ? $peace_condition : $basic_education->peace_condition;
+        $basic_education->address = $address ? $address : $basic_education->address;
+        $basic_education->business_interest = $business_interest ? $business_interest : $basic_education->business_interest;
+        
+
+        if ($file = $request->file('file')) {
+            $file = $request->file->store('public/documents');
+            $basic_education->image = $file;    
+        }
 
         if ($basic_education->save()) {
+            Storage::delete($filename);
+            return response(['success' => true]);
+        }
+
+        return response(['success' => false]);
+    }
+
+    public function updateForm(Request $request, $id)
+    {
+        $basic_education = BasicEducation::findOrFail($id);
+
+        $lastname = $request->input('lastname');
+        $firstname = $request->input('firstname');
+        $middlename = $request->input('middlename');
+        $extension = $request->input('extension');
+        $birthdate = $request->input('birthdate');
+        $gender = $request->input('gender');
+        // $image = $request->input('image');
+        $marital_status = $request->input('marital_status');
+        $spouse_name = $request->input('spouse_name');
+        $student_children_num = $request->input('student_children_num');
+        $is_orphan = $request->input('is_orphan');
+        $medical_condition = $request->input('medical_condition');
+        $hobby = $request->input('hobby');
+        $student_affiliation = $request->input('student_affiliation');
+        $blood_type = $request->input('blood_type');
+        $brothers_num = $request->input('brothers_num');
+        $sisters_num = $request->input('sisters_num');
+        $is_balik_aral = $request->input('is_balik_aral');
+        $is_4p_beneficiary = $request->input('is_4p_beneficiary');
+        $parent_affiliation = $request->input('parent_affiliation');
+        $position = $request->input('position');
+        $years_of_service = $request->input('years_of_service');
+        $educational_background = $request->input('educational_background');
+        $monthly_income = $request->input('monthly_income');
+        $source_of_income = $request->input('source_of_income');
+        $has_real_property = $request->input('has_real_property');
+        $has_personal_property = $request->input('has_personal_property');
+        $has_house = $request->input('has_house');
+        $contact_num = $request->input('contact_num');
+        $parent_children_num = $request->input('parent_children_num');
+        $dependents_num = $request->input('dependents_num');
+        $mode_of_transport = $request->input('mode_of_transport');
+        $school_distance = $request->input('school_distance');
+        $peace_condition = $request->input('peace_condition');
+        $address = $request->input('address');
+        $business_interest = $request->input('business_interest');
+
+        $filename = $basic_education->image;
+
+        $basic_education->lastname = $lastname ? $lastname : $basic_education->lastname;
+        $basic_education->firstname = $firstname ? $firstname : $basic_education->firstname;
+        $basic_education->middlename = $middlename ? $middlename : $basic_education->middlename;
+        $basic_education->extension = $extension ? $extension : $basic_education->extension;
+        $basic_education->birthdate = $birthdate ? $birthdate : $basic_education->birthdate;
+        $basic_education->gender = $gender ? $gender : $basic_education->gender;
+        $basic_education->marital_status = $marital_status ? $marital_status : $basic_education->marital_status;
+        $basic_education->spouse_name = $spouse_name ? $spouse_name : $basic_education->spouse_name;
+        $basic_education->student_children_num = $student_children_num ? $student_children_num : $basic_education->student_children_num;
+        $basic_education->is_orphan = $is_orphan ? $is_orphan : $basic_education->is_orphan;
+        $basic_education->medical_condition = $medical_condition ? $medical_condition : $basic_education->medical_condition;
+        $basic_education->hobby = $hobby ? $hobby : $basic_education->hobby;
+        $basic_education->student_affiliation = $student_affiliation ? $student_affiliation : $basic_education->student_affiliation;
+        $basic_education->blood_type = $blood_type ? $blood_type : $basic_education->blood_type;
+        $basic_education->brothers_num = $brothers_num ? $brothers_num : $basic_education->brothers_num;
+        $basic_education->sisters_num = $sisters_num ? $sisters_num : $basic_education->sisters_num;
+        $basic_education->is_balik_aral = $is_balik_aral ? $is_balik_aral : $basic_education->is_balik_aral;
+        $basic_education->is_4p_beneficiary = $is_4p_beneficiary ? $is_4p_beneficiary : $basic_education->is_4p_beneficiary;
+        $basic_education->parent_affiliation = $parent_affiliation ? $parent_affiliation : $basic_education->parent_affiliation;
+        $basic_education->position = $position ? $position : $basic_education->position;
+        $basic_education->years_of_service = $years_of_service ? $years_of_service : $basic_education->years_of_service;
+        $basic_education->educational_background = $educational_background ? $educational_background : $basic_education->educational_background;
+        $basic_education->monthly_income = $monthly_income ? $monthly_income : $basic_education->monthly_income;
+        $basic_education->source_of_income = $source_of_income ? $source_of_income : $basic_education->source_of_income;
+        $basic_education->has_real_property = $has_real_property ? $has_real_property : $basic_education->has_real_property;
+        $basic_education->has_personal_property = $has_personal_property ? $has_personal_property : $basic_education->has_personal_property;
+        $basic_education->has_house = $has_house ? $has_house : $basic_education->has_house;
+        $basic_education->contact_num = $contact_num ? $contact_num : $basic_education->contact_num;
+        $basic_education->parent_children_num = $parent_children_num ? $parent_children_num : $basic_education->parent_children_num;
+        $basic_education->dependents_num = $dependents_num ? $dependents_num : $basic_education->dependents_num;
+        $basic_education->mode_of_transport = $mode_of_transport ? $mode_of_transport : $basic_education->mode_of_transport;
+        $basic_education->school_distance = $school_distance ? $school_distance : $basic_education->school_distance;
+        $basic_education->peace_condition = $peace_condition ? $peace_condition : $basic_education->peace_condition;
+        $basic_education->address = $address ? $address : $basic_education->address;
+        $basic_education->business_interest = $business_interest ? $business_interest : $basic_education->business_interest;
+        
+
+        if ($file = $request->file('file')) {
+            $file = $request->file->store('public/documents');
+            $basic_education->image = $file;    
+        }
+
+        if ($basic_education->save()) {
+            Storage::delete($filename);
             return response(['success' => true]);
         }
 

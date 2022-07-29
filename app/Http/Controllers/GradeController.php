@@ -22,7 +22,7 @@ class GradeController extends Controller
         $student_id = $request->student_id ? $request->student_id : 0;
 
         if ($student_id && $term_id && $sy) {
-            $grades = StudentClass::select('grades.id', 'grades.grade', 'grading_periods.name as grading_period',
+            $grades = StudentClass::select('grades.id', 'grades.grade', 'grading_periods.name as grading_period', 
                 'subjects.name as subject', 'class_lists.id as classlist_id')
                 ->leftJoin('class_lists', 'class_lists.id', '=', 'student_classes.class_list_id')
                 ->leftJoin('grades', 'grades.class_list_id', '=', 'class_lists.id')
@@ -102,7 +102,7 @@ class GradeController extends Controller
                 if (!array_key_exists($val->sy, $data)) {
                     $data[$val->sy] = [];
                 }
-
+                
                 if (!array_key_exists($val->term, $data[$val->sy])) {
                     $data[$val->sy][$val->term] = [];
                 }
@@ -145,7 +145,7 @@ class GradeController extends Controller
     public function update(Request $request, $id)
     {
         $grade = Grade::findOrFail($id);
-
+        
         $student_id = $request->input('student_id');
         $class_list_id = $request->input('class_list_id');
         $grading_period_id = $request->input('grading_period_id');

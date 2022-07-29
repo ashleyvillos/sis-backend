@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Enrollment extends Model
+class StudentLog extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'sy',
-        'term_id',
         'student_id',
-        'course_id',
-        'year_level'
+        'logged_by',
+        'log_type',
+        'remarks'
     ];
 }

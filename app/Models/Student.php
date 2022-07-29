@@ -13,6 +13,6 @@ class Student extends Model
         'basic_education_id',
         'madaris_id',
         'higher_education_id',
-        'techvoc_id',
+        'techcov_id',
     ];
 }

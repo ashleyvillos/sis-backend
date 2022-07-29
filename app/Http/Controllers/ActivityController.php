@@ -18,7 +18,7 @@ class ActivityController extends Controller
     {
         $limit = $request->limit ? $request->limit : 10;
 
-        $activities = Activity::select('id', 'name', 'code', 'description', 'from', 'to')
+        $activities = Activity::select('id', 'name', 'code', 'description', 'form', 'to')
             ->orderBy('id', 'desc')->paginate($limit);
 
         return response(['data' => $activities, 'limit' => $limit]);

@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GradingPeriod extends Model
+class StudentLogFile extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
-        'name',
-        'code',
-        'description',
+        'student_log_id',
+        'filename'
     ];
 }

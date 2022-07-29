@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBillingItemsTable extends Migration
+class CreateStudentLogFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateBillingItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('billing_items', function (Blueprint $table) {
+        Schema::create('student_log_files', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('code')->nullable();
-            $table->string('category')->nullable();
-            $table->string('description')->nullable();
-            $table->decimal('cost')->default(0);
+            $table->integer('student_log_id');
+            $table->string('filename');
+            $table->string('title');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateBillingItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('billing_items');
+        Schema::dropIfExists('student_log_files');
     }
 }

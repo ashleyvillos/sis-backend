@@ -14,5 +14,6 @@ class Subject extends Model
         'code',
         'description',
         'cost',
+        'units',
     ];
 }
