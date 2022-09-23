@@ -15,27 +15,28 @@ class CreateHigherEducationTable extends Migration
     {
         Schema::create('higher_education', function (Blueprint $table) {
             $table->id();
-            $table->string('lastname')->nullable();
             $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
             $table->string('middlename')->nullable();
+            $table->string('extension')->nullable();
             $table->string('gender')->nullable();
-            $table->string('citizenship')->nullable();
-            $table->string('religion')->nullable();
-            $table->string('civil_status')->nullable();
             $table->date('birthdate')->nullable();
-            $table->string('birth_place')->nullable();
-            $table->string('contact')->nullable();
-            $table->string('permanent_address')->nullable();
-            $table->string('current_address')->nullable();
-            $table->string('father_name')->nullable();
-            $table->string('mother_name')->nullable();
-            $table->string('status')->nullable(); // transferee, rejoining, degree holder from other schools, others (0 - 3) 
-            $table->string('degree_applications')->nullable(); 
-            $table->string('highschool_attended')->nullable(); 
-            $table->string('school_names')->nullable(); 
-            $table->boolean('grades_submitted')->default(false); 
-            $table->boolean('enrolled_summer')->default(false); 
-            $table->string('disciplinary_actions')->nullable(); 
+            $table->string('mother_tongue')->nullable();
+            $table->string('ip_community')->nullable();
+
+            $table->string('street')->nullable();
+            $table->string('baranggay')->nullable();
+            $table->string('district')->nullable();
+            $table->string('region')->nullable();
+            $table->string('province')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zip_code')->nullable();
+
+            $table->string('father')->nullable();
+            $table->string('mother')->nullable();
+            $table->string('guardian')->nullable();
+            $table->string('telephone')->nullable();
+            $table->string('cellphone')->nullable();
             $table->timestamps();
         });
     }
