@@ -45,21 +45,22 @@ class MadarisController extends Controller
         $extension = $request->input('extension');
         $gender = $request->input('gender');
         $birthdate = $request->input('birthdate');
-        $birthplace = $request->input('birthplace');
-        $nationality = $request->input('nationality');
+        $mother_tongue = $request->input('mother_tongue');
+        $ip_community = $request->input('ip_community');
+
         $street = $request->input('street');
         $baranggay = $request->input('baranggay');
         $district = $request->input('district');
         $region = $request->input('region');
         $province = $request->input('province');
         $city = $request->input('city');
-        $email = $request->input('email');
-        $mobile = $request->input('mobile');
-        $phone = $request->input('phone');
+        $zip_code = $request->input('zip_code');
+
+        $father = $request->input('father');
+        $mother = $request->input('mother');
         $guardian = $request->input('guardian');
-        $guardian_address = $request->input('guardian_address');
-        $beneficiary = $request->input('beneficiary');
-        $relationship_to_beneficiary = $request->input('relationship_to_beneficiary');
+        $telephone = $request->input('telephone');
+        $cellphone = $request->input('cellphone');
 
         $madaris->firstname = $firstname;
         $madaris->lastname = $lastname;
@@ -67,21 +68,22 @@ class MadarisController extends Controller
         $madaris->extension = $extension;
         $madaris->gender = $gender;
         $madaris->birthdate = $birthdate;
-        $madaris->birthplace = $birthplace;
-        $madaris->nationality = $nationality;
+        $madaris->mother_tongue = $mother_tongue;
+        $madaris->ip_community = $ip_community;
+
         $madaris->street = $street;
         $madaris->baranggay = $baranggay;
         $madaris->district = $district;
         $madaris->region = $region;
         $madaris->province = $province;
         $madaris->city = $city;
-        $madaris->email = $email;
-        $madaris->mobile = $mobile;
-        $madaris->phone = $phone;
+        $madaris->zip_code = $zip_code;
+
+        $madaris->father = $father;
+        $madaris->mother = $mother;
         $madaris->guardian = $guardian;
-        $madaris->guardian_address = $guardian_address;
-        $madaris->beneficiary = $beneficiary;
-        $madaris->relationship_to_beneficiary = $relationship_to_beneficiary;
+        $madaris->telephone = $telephone;
+        $madaris->cellphone = $cellphone;
 
         if ($madaris->save()) {
             return response(['success' => true, 'id' => $madaris->id]);
@@ -132,21 +134,22 @@ class MadarisController extends Controller
         $extension = $request->input('extension');
         $gender = $request->input('gender');
         $birthdate = $request->input('birthdate');
-        $birthplace = $request->input('birthplace');
-        $nationality = $request->input('nationality');
+        $mother_tongue = $request->input('mother_tongue');
+        $ip_community = $request->input('ip_community');
+
         $street = $request->input('street');
         $baranggay = $request->input('baranggay');
         $district = $request->input('district');
         $region = $request->input('region');
         $province = $request->input('province');
         $city = $request->input('city');
-        $email = $request->input('email');
-        $mobile = $request->input('mobile');
-        $phone = $request->input('phone');
+        $zip_code = $request->input('zip_code');
+
+        $father = $request->input('father');
+        $mother = $request->input('mother');
         $guardian = $request->input('guardian');
-        $guardian_address = $request->input('guardian_address');
-        $beneficiary = $request->input('beneficiary');
-        $relationship_to_beneficiary = $request->input('relationship_to_beneficiary');
+        $telephone = $request->input('telephone');
+        $cellphone = $request->input('cellphone');
 
         $madaris->firstname = $firstname;
         $madaris->lastname = $lastname;
@@ -154,21 +157,22 @@ class MadarisController extends Controller
         $madaris->extension = $extension;
         $madaris->gender = $gender;
         $madaris->birthdate = $birthdate;
-        $madaris->birthplace = $birthplace;
-        $madaris->nationality = $nationality;
+        $madaris->mother_tongue = $mother_tongue;
+        $madaris->ip_community = $ip_community;
+
         $madaris->street = $street;
         $madaris->baranggay = $baranggay;
         $madaris->district = $district;
         $madaris->region = $region;
         $madaris->province = $province;
         $madaris->city = $city;
-        $madaris->email = $email;
-        $madaris->mobile = $mobile;
-        $madaris->phone = $phone;
+        $madaris->zip_code = $zip_code;
+
+        $madaris->father = $father;
+        $madaris->mother = $mother;
         $madaris->guardian = $guardian;
-        $madaris->guardian_address = $guardian_address;
-        $madaris->beneficiary = $beneficiary;
-        $madaris->relationship_to_beneficiary = $relationship_to_beneficiary;
+        $madaris->telephone = $telephone;
+        $madaris->cellphone = $cellphone;
 
         if ($madaris->save()) {
             return response(['success' => true]);
